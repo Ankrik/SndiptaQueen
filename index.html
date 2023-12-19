@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToYou</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+  font-family: 'Gaegu', cursive;
+}
+
+.bg-wrap {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.background {
+  display: flex;
+  flex-wrap: wrap;
+  width: max-content;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+}
+
+.background:nth-of-type(2n) {
+  margin-left: -50px;
+}
+
+.bg-heart {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  animation: heartbeat 1s infinite;
+  font-size: 16px;
+}
+
+.bg-heart:nth-of-type(2n) {
+  animation-delay: 0.5s;
+}
+
+.background:nth-of-type(2n) .bg-heart:nth-of-type(2n) {
+  animation-delay: 0;
+}
+
+.envelope,
+.card {
+  display: block;
+  position: absolute;
+  top: 10vmin;
+  left: 10vmin;
+  width: calc(100vw - 20vmin);
+  height: calc(100vh - 20vmin);
+  border-radius: 5vmin;
+  background: #eed5df;
+  overflow: hidden;
+}
+
+.envelope {
+  z-index: 2;
+  transition: opacity 1s;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  border-radius: 5vmin;
+  background: #eed5df;
+  box-shadow: 0.5vmin 1vmin 2vmin 0 rgb(0 0 0 / 16%);
+}
+
+.heart {
+  position: absolute;
+  bottom: -5vw;
+  left: 50%;
+  width: 5vw;
+  height: 5vw;
+  cursor: pointer;
+  background: #d33885;
+  animation: bigHeartbeat 1.5s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #d33885;
+  z-index: 1;
+}
+
+.heart::before {
+  top: 0;
+  left: -50%;
+}
+
+.heart::after {
+  top: -50%;
+  left: 0;
+}
+
+.card {
+  padding: 7vmin;
+  z-index: 1;
+  box-shadow: 0.5vmin 1vmin 2vmin 0 rgb(0 0 0 / 16%);
+}
+
+.dear,
+.from {
+  font-size: 33px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.from {
+  text-align: right;
+}
+
+.dear,
+.letter {
+  margin-bottom: 3vw;
+}
+
+.letter {
+  height: calc(100% - 6vw - 80px);
+  background: linear-gradient(-45deg, #e7d069, #ec81aa, #86d0eb, #77dac3);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  border-radius: 3vmin;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.letter::-webkit-scrollbar {
+  width: 6px;
+}
+
+.letter::-webkit-scrollbar-thumb {
+  height: 10%;
+  background-color: #d33885;
+  border-radius: 3px;
+}
+
+.letter::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.scroll-area {
+  min-height: calc(100% - 6vmin);
+  margin: 3vmin;
+  font-size: 25px;
+  line-height: 40px;
+  background: -webkit-linear-gradient(
+    top,
+    #d33885 0%,
+    #d33885 1px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    #d33885 0%,
+    #d33885 1px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-size: 100% 40px;
+}
+
+.letter p {
+  word-break: break-all;
+}
+
+.date {
+  display: block;
+  text-align: right;
+}
+
+@media all and (max-width: 500px) {
+  .background:nth-of-type(2n) {
+    margin-left: -40px;
+  }
+  .bg-heart {
+    width: 80px;
+    height: 80px;
+  }
+  .dear, .from {
+    font-size: 28px;
+  }
+  .scroll-area {
+    font-size: 20px;
+    line-height: 35px;
+    background-size: 100% 35px;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  40%,
+  80%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.75;
+  }
+  20%,
+  60% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bigHeartbeat {
+  0%,
+  40%,
+  80%,
+  100% {
+    transform: scale(1) translateY(-50%) rotate(45deg);
+  }
+  20%,
+  60% {
+    transform: scale(1.2) translateY(-35%) rotate(45deg);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="bg-wrap">
+        <div class="background"></div>
+      </div>
+      <div class="envelope">
+        <div class="cover">
+          <span class="heart btn-open"></span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="dear">☺️ Hi Miss.Kundu ...</div>
+        <div class="letter">
+          <div class="scroll-area">
+            <p>
+               I hope this letter finds you smiling, As I sit down to put my thoughts into words, I find <br>
+               myself grappling with the challenge of capturing the essence of my thoughts of you.In<br> every shared moment virtually on what's app, you have this incredible ability to make my<br> ,ind go crazy.I can recall every hot moment, especially the first time we talked, it was an <br>amazing moment for me.<br>
+               <br>I understand that nowadays, you are very busy and you reply lesse<br> , but I really miss you. Even though we don't talk that much, those small chats brighten<br> up my day. Tum pasand aaye ho mujhe, I wanna see u in saree. I wanna<br> take you out on a date where I want to feel your heartbeat and breathe closely . "They say the truth that the stars are proof that we can feel magic even from afar."<br>
+               <br>
+               When you are free and get time, I want you to take you out on a movie date and all the things we talked on what's app chat.
+              <br>
+              Bohot sare batein karni hain tumse,<br>
+              Ek din fursat se aana,    <br>
+              Mai apne khayaal launga,<br>
+              Tum bas wakt leke aana. <br>
+
+              <br>
+              Take care,.
+
+              <br>Warm regards,
+               <span class="date">2023. 12. 19</span>
+            </p>
+          </div>
+        </div>
+        <div class="from">From. AB 👋🏽</div>
+      </div>
+      <script>
+        const background = document.querySelector('.background');
+const envelope = document.querySelector('.envelope');
+const btnOpen = envelope.querySelector('.btn-open');
+
+const openCard = () => {
+  envelope.style.opacity = '0';
+  setTimeout(() => {
+    envelope.remove()
+  }, 1000)
+};
+const createBgHeart = () => {
+  const hearts = ['🧡', '💛', '💚', '💙', '💜', '🤍', '💗'];
+  const randomHeart = hearts[~~(Math.random() * hearts.length)];
+
+  return `<span class="bg-heart">${randomHeart}</span>`;
+};
+const addBgHeart = () => (background.innerHTML += createBgHeart());
+const addBg = () => {
+  const newBg = background.cloneNode(true);
+  background.after(newBg);
+};
+
+function fnRecursive(max, fnAdd) {
+  let cnt = 0;
+  const addEl = () => {
+    cnt++;
+    fnAdd();
+    if (cnt === max) return;
+    addEl();
+  };
+  addEl();
+}
+
+fnRecursive(20, addBgHeart);
+fnRecursive(15, addBg);
+
+btnOpen.addEventListener('click', openCard);
+      </script>
+</body>
+</html>
